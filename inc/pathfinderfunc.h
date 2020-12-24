@@ -37,5 +37,3 @@ void pbi(t_islandst **island, t_pathdata **path, int isl, int dist);
 void island_pop_front(t_islandst **head);
 void island_pop_middle(t_islandst **unvisited, int index);
 void sort_path(t_pathdata **disp, int sizeP);
-int add_index_pathes(t_pathdata **path);
-t_pathlist *create_l();

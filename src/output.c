@@ -77,14 +77,27 @@ static void display_path(t_pathdata **disp, int distTo, char **set) {
 
 void print_output(t_islandst **visited, int root, int size, char **set) {
     t_islandst *current = NULL;
-    int sizeP;
 
-    for (; root < size; root++) {
+    for (int i = 0; root < size; root++) {
         current = *visited;
         while (current->num != root)
             current = current->next;
-        sizeP = add_index_pathes(&current->path);
-        sort_path(&current->path, sizeP);
+
+        t_pathdata *indexed = current->path;
+        t_pathdata *conns = NULL;
+        
+        int j;
+        for (j = 0; indexed; j++) {
+            conns = indexed;
+            while (conns) {
+                conns->pos = j;
+                conns = conns->link;
+            }
+            indexed = indexed->forpath;
+        }
+        i = j;
+
+        sort_path(&current->path, i);
         display_path(&current->path, current->target, set);
     }
 }
